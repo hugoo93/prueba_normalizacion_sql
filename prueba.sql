@@ -108,3 +108,9 @@ CREATE TABLE cliente_factura(factura_num_factura INT, cliente_id INT, FOREIGN KE
     INSERT INTO factura_detalle(factura_num_factura, detalle_id) VALUES(12353, 22);
     INSERT INTO factura_detalle(factura_num_factura, detalle_id) VALUES(12353, 23);
     INSERT INTO factura_detalle(factura_num_factura, detalle_id) VALUES(12354, 24);
+
+--PARTE 3
+
+    --¿Que cliente realizó la compra más cara?
+    --RESPUESTA: precio total = 6545, nombre = Angie Rivas
+    SELECT facturas.precio_total, clientes.nombre FROM facturas INNER JOIN cliente_factura ON facturas.num_factura=cliente_factura.factura_num_factura LEFT JOIN clientes ON cliente_factura.cliente_id=clientes.id ORDER BY precio_total DESC LIMIT 1;
