@@ -117,3 +117,16 @@ CREATE TABLE cliente_factura(factura_num_factura INT, cliente_id INT, FOREIGN KE
 
     --¿Que cliente pagó sobre 100 de monto?
     SELECT clientes.nombre FROM facturas INNER JOIN cliente_factura ON facturas.num_factura=cliente_factura.factura_num_factura LEFT JOIN clientes ON cliente_factura.cliente_id=clientes.id WHERE precio_total>100 GROUP BY clientes.nombre;
+
+    --¿Cuantos clientes han comprado el producto 6?.
+    --RESPUESTA: 3 clientes
+    SELECT COUNT(clientes.id)
+    FROM clientes
+    INNER JOIN cliente_factura
+    ON clientes.id=cliente_factura.cliente_id
+    RIGHT JOIN factura_detalle
+    ON cliente_factura.factura_num_factura=factura_detalle.factura_num_factura
+    LEFT JOIN detalles
+    ON factura_detalle.detalle_id=detalles.id
+    WHERE detalles.producto_id=6
+    ;
