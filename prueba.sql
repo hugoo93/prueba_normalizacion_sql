@@ -114,3 +114,6 @@ CREATE TABLE cliente_factura(factura_num_factura INT, cliente_id INT, FOREIGN KE
     --¿Que cliente realizó la compra más cara?
     --RESPUESTA: precio total = 6545, nombre = Angie Rivas
     SELECT facturas.precio_total, clientes.nombre FROM facturas INNER JOIN cliente_factura ON facturas.num_factura=cliente_factura.factura_num_factura LEFT JOIN clientes ON cliente_factura.cliente_id=clientes.id ORDER BY precio_total DESC LIMIT 1;
+
+    --¿Que cliente pagó sobre 100 de monto?
+    SELECT clientes.nombre FROM facturas INNER JOIN cliente_factura ON facturas.num_factura=cliente_factura.factura_num_factura LEFT JOIN clientes ON cliente_factura.cliente_id=clientes.id WHERE precio_total>100 GROUP BY clientes.nombre;
